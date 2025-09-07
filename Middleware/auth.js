@@ -1,6 +1,6 @@
 import { catchAsync, HandleERROR } from "vanta-api";
 import jwt from "jsonwebtoken";
-import User from "../Models/UserMd";
+import User from "../Models/UserMd.js";
 export const protectRoute = catchAsync(async (req, res) => {
   const token = req.headers.token;
   const decoded = jwt.verify(token, process.env.JWT_SECRET);

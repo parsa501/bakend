@@ -1,9 +1,9 @@
 import bcryptjs from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { catchAsync, HandleERROR } from "vanta-api";
-import User from "../Models/UserMd";
-import { generateToken } from "../Utils/Utils";
-import cloudinary from "../Utils/cloudinary";
+import User from "../Models/UserMd.js";
+import { generateToken } from "../Utils/Utils.js";
+import cloudinary from "../Utils/cloudinary.js";
 
 // Singup a new User
 export const Singup = catchAsync(async (req, res, next) => {

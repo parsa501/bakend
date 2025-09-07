@@ -5,6 +5,7 @@ import path from "path";
 import { catchError, HandleERROR } from "vanta-api";
 import swaggerUi from "swagger-ui-express";
 import swaggerDocs from "./Utils/Swagger.js";
+import userRouter from "./Routes/User.js";
 const __filename = fileURLToPath(import.meta.url);
 export const __dirname = path.dirname(__filename);
 const app = express();
@@ -15,6 +16,8 @@ app.use(cors());
 app.use("/api/status", (req, res, next) => {
   res.send("Server is live");
 });
+
+app.use("/api/auth",userRouter)
 
 
 

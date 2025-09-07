@@ -3,6 +3,7 @@ import jwt from "jsonwebtoken";
 import { catchAsync, HandleERROR } from "vanta-api";
 import User from "../Models/UserMd";
 import { generateToken } from "../Utils/Utils";
+import cloudinary from "../Utils/cloudinary";
 
 // Singup a new User
 export const Singup = catchAsync(async (req, res, next) => {
@@ -34,13 +35,13 @@ export const Singup = catchAsync(async (req, res, next) => {
 //contoroller to login a user
 export const login = catchAsync(async (req, res, next) => {
   const { email, password } = req.body;
-  const userData=await User.findOne({email})
-  const isPasswordCorrent=await bcryptjs.compare(password,userData.password)
+  const userData = await User.findOne({ email });
+  const isPasswordCorrent = await bcryptjs.compare(password, userData.password);
 
-  if(!isPasswordCorrent){
-    return next(new HandleERROR("Invalid credentials",404))
+  if (!isPasswordCorrent) {
+    return next(new HandleERROR("Invalid credentials", 404));
   }
-    const token = generateToken(userData._id);
+  const token = generateToken(userData._id);
   return res.status(200).json({
     success: true,
     message: "Login successful",
@@ -50,3 +51,26 @@ export const login = catchAsync(async (req, res, next) => {
 });
 
 //controller to check if user is authenticated
+export const checkAuth = (req, res, next) => {
+  res.json({ success: true, user: req.user });
+};
+
+export const updateProfile = catchAsync(async (req, res, next) => {
+  const { profilepic, bio, fullName } = req.body;
+  const userId = req.user._id;
+  let updateUser;
+  if (!profilepic) {
+    await User.findByIdAndUpdate(userId, { bio, fullName }, { new: true });
+  } else {
+    const upload = await cloudinary.uploader.upload(profilepic);
+    updateUser = await User.findByIdAndUpdate(
+      userId,
+      { profilePic: upload.secure_url, bio, fullName },
+      { new: true }
+    );
+  }
+  return res.status(203).json({
+    success: true,
+    user: updateUser,
+  });
+});

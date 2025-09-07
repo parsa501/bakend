@@ -3,9 +3,9 @@ const option={
     definition:{
         openapi:"3.0.0",
         info:{
-            title:"Blog API",
+            title:"chat API",
             version:"1.0.0",
-            description:"API documentation for the Blog application"
+            description:"API documentation for the chat application"
         },
         servers:[
             {

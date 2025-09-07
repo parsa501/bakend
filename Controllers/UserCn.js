@@ -1,5 +1,4 @@
 import bcryptjs from "bcryptjs";
-import jwt from "jsonwebtoken";
 import { catchAsync, HandleERROR } from "vanta-api";
 import User from "../Models/UserMd.js";
 import { generateToken } from "../Utils/Utils.js";

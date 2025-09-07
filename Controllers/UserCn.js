@@ -14,7 +14,7 @@ export const Singup = catchAsync(async (req, res, next) => {
   if (user) {
     return next(new HandleERROR("Account already exists", 404));
   }
-  const salt = await bcryptjs.getSalt(10);
+  const salt = await bcryptjs.genSalt(10);
   const hashPassword = await bcryptjs.hash(password, salt);
   const newUser = await User.create({
     fullName,

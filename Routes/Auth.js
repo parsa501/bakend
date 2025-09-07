@@ -109,14 +109,10 @@
  */
 import express from "express";
 import { login, register } from "../Controllers/AuthCn.js";
-import {
-  loginValidation,
-  registerValidation,
-} from "../Middleware/validators/authValidator.js";
-import handleValidation from "../Middleware/handleValidation.js";
+
 const authRouter = express.Router();
-authRouter.route("/").post(loginValidation, handleValidation, login);
+authRouter.route("/").post(  login);
 authRouter
   .route("/register")
-  .post(registerValidation, handleValidation, register);
+  .post( register);
 export default authRouter;

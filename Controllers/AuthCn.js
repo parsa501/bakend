@@ -1,7 +1,7 @@
-import User from "./../Models/UserMd.js";
 import bcryptjs from "bcryptjs";
 import jwt from 'jsonwebtoken'
 import { catchAsync,HandleERROR } from "vanta-api";
+import User from "../Models/UserMd";
 export const login = catchAsync(async (req, res, next) => {
     const { username = null, password = null } = req.body;
     if (!username || !password) {

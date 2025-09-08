@@ -2,6 +2,7 @@ import { catchAsync } from "vanta-api";
 import User from "../Models/UserMd.js";
 import Message from "../Models/Message.js";
 import { io, userSocketMap } from "../server.js";
+import cloudinary from "../Utils/cloudinary.js";
 
 //Get all user exceot the logged in user
 export const getUsersForSidebar = catchAsync(async (req, res, next) => {

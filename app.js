@@ -7,6 +7,7 @@ import swaggerUi from "swagger-ui-express";
 import swaggerDocs from "./Utils/Swagger.js";
 import userRouter from "./Routes/User.js";
 import messageRouter from "./Routes/Message.js";
+import morgan from "morgan";
 
 const __filename = fileURLToPath(import.meta.url);
 export const __dirname = path.dirname(__filename);
@@ -15,6 +16,7 @@ const app = express();
 
 app.use(express.json({ limit: "4mb" }));
 app.use(cors());
+app.use(morgan("dev"));
 
 // simple status route
 app.use("/api/status", (req, res) => {
